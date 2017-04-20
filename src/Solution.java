@@ -1,9 +1,9 @@
 public class Solution {
-    private static final double epsilon = 0.00001;
+    private static final double epsilon = 0.000001;
 
     public static void main(String[] args) {
         double xcur;
-        double xnext = 6.25;
+        double xnext = 4.1;
         int iterations = 0;
         System.out.println("Выполнение условий теоремы: " + checkTheoremConditions(xnext));
         System.out.println("Начальное приближение: " + xnext);
@@ -33,7 +33,7 @@ public class Solution {
         double h = - calculateF(xApprox) / calculateFDeriv(xApprox);
         double max = -1;
         double buf;
-        for (double i = xApprox; i <= xApprox + 2 * h; i += epsilon) {
+        for (double i = Math.min(xApprox, xApprox + 2 * h); i <= Math.max(xApprox, xApprox + 2 * h); i += epsilon) {
             buf = Math.abs(calculateFSecondDeriv(i));
             if (max < buf) {
                 max = buf;
