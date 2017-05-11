@@ -3,8 +3,9 @@ public class Solution {
 
     public static void main(String[] args) {
         double xcur;
-        double xnext = 4.1;
+        double xnext = 3.75;
         int iterations = 0;
+        System.out.println("abs(fDeriv(x0)): " + Math.abs(calculateFDeriv(xnext)));
         System.out.println("Выполнение условий теоремы: " + checkTheoremConditions(xnext));
         System.out.println("Начальное приближение: " + xnext);
         do {
@@ -31,14 +32,9 @@ public class Solution {
 
     private static boolean checkTheoremConditions(double xApprox) {
         double h = - calculateF(xApprox) / calculateFDeriv(xApprox);
-        double max = -1;
-        double buf;
-        for (double i = Math.min(xApprox, xApprox + 2 * h); i <= Math.max(xApprox, xApprox + 2 * h); i += epsilon) {
-            buf = Math.abs(calculateFSecondDeriv(i));
-            if (max < buf) {
-                max = buf;
-            }
-        }
+        double max = Math.max(calculateFSecondDeriv(xApprox), calculateFSecondDeriv(xApprox + 2 * h));
+        System.out.println("h: " + h);
+        System.out.println("M: " + max);
         return 2 * Math.abs(h) * max <= Math.abs(calculateFDeriv(xApprox));
     }
 }
